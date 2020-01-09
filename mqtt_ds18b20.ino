@@ -101,17 +101,14 @@ void loop() {
  float celsius = sensors.getTempCByIndex(0);
  Serial.println(sensors.getTempCByIndex(0));
  
+ if (!client.connected()) {
+ reconnect();
  char temperaturenow [15];
  dtostrf(celsius,7, 3, temperaturenow); 
  client.publish("temperature/belka/sensor", temperaturenow); 
- 
- if (!client.connected()) {
- reconnect();
- delay(2000);
  }
- client.loop();
- 
- delay(2000); 
+ delay(2000);
  ESP.deepSleep(600e6);
- delay(2000); 
+ delay(2000);
 }
+
